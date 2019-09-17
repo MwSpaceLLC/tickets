@@ -15,7 +15,7 @@ class AdminController extends Controller
 
     public function departments()
     {
-        return view('departments');
+        return view('theme.' . config('app.theme') . '.departments');
     }
 
     public function newdepartment(Request $request)
@@ -31,7 +31,7 @@ class AdminController extends Controller
 
     public function users()
     {
-        return view('users');
+        return view('theme.' . config('app.theme') . '.users');
     }
 
 

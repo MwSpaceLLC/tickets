@@ -17,7 +17,7 @@ class TicketController extends Controller
 
     public function new()
     {
-        return view('tickets.new');
+        return view('theme.' . config('app.theme') . '.tickets.new');
     }
 
     public function open(Request $request)
@@ -45,7 +45,7 @@ class TicketController extends Controller
             Tickets::where('status', $request->status)->paginate(8) :
             Tickets::paginate(8);
 
-        return view('tickets.list')->with('tickets', $tickets);
+        return view('theme.' . config('app.theme') . '.tickets.list')->with('tickets', $tickets);
     }
 
     public function show(Request $request)
@@ -59,7 +59,7 @@ class TicketController extends Controller
             $ticketViews->save();
         }
 
-        return view('tickets.show')->with('ticket', Tickets::findOrFail($request->id));
+        return view('theme.' . config('app.theme') . '.tickets.show')->with('ticket', Tickets::findOrFail($request->id));
     }
 
     public function close(Request $request)

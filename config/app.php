@@ -17,6 +17,8 @@ return [
 
     'from' => env('APP_FROM', 'info@tickets.mwspace.com'),
 
+    'theme' => 'dynamic',
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

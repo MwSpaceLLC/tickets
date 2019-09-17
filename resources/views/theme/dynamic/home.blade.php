@@ -1,16 +1,16 @@
-@extends('layouts.app')
+@extends("$layouts.app")
 
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
 
-            @if(Auth::user()->active)
-                @include('component.sidebar')
+            @if(auth()->user()->active)
+                @include("$component.sidebar")
             @endif
 
             <div class="col-md-10">
 
-                @if(!Auth::user()->active)
+                @if(!auth()->user()->active)
                     <div class="bd-callout bd-callout-warning">
                         <h4 id="conveying-meaning-to-assistive-technologies">@lang('attivazione permessi account')</h4>
                         <p>@lang('Devi aspettare che un amministratore di sistema attivi il tuo account')</p>

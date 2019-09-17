@@ -7,6 +7,10 @@ MwSpace LLC is a most advanced brand for develop any idea e/o startup. Our busin
 This product help many companies to manage work with simple ticket system.
 No mounthly cost, only deploy app on cloud, & work every u want! 
 
+### Important !! 
+
+This repo NOT stable, please download at your risk. Public beta will cooming soon at 30/09/2019
+
 ### Contributing
 Thank you for considering contributing to the Tickets Project, if u want to hep us, 
 u can become a [Patreon] (https://www.patreon.com/user?u=24519588)
@@ -18,7 +22,7 @@ If you discover a security vulnerability within Tickets, please send an e-mail t
 The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ### First Install ?
-U can deploy on cPanel as git version control, or container with docker, in cloud run, app engine or any choise.
+U can deploy on cPanel as git version control, or container with docker, in cloud run, app engine or any choise. [cPanel Install from Git](https://www.youtube.com/watch?v=K63EGgPvlIw)
 
 so u must login as user in to ssh & cd in your project:
 
@@ -47,3 +51,22 @@ Fine Work! if all work u can run:
     php artisan migrate
     
 If u have any problem, please first read the Laravel's guide =)
+
+### Trick 6 knows
+
+1) Create user,groups, access
+1) Control login permission,
+1) Change Theme (u can develop a front-end & change it in config),
+1) Intelligent Work (see only ticket without reply)
+1) Ticket support (Header, Images/cliopard, Link, attachment)
+1) Peaple Views & last reply
+1) Close, re-open & report
+1) Mail allert ticket opened,replied
+1) Monthly report status 
+
+Other Futures cooming soon !
+
+### Control Updates
+
+With git, u can update the core. if this repo are Stable, or Beta u can easily update code from git command "pull"
+

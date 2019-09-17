@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
 
     /**
@@ -30,17 +30,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Enable pagination
-//        if (!Collection::hasMacro('paginate')) {
-//
-//            Collection::macro('paginate',
-//                function ($perPage = 15, $page = null, $options = []) {
-//                    $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-//                    return (new LengthAwarePaginator(
-//                        $this->forPage($page, $perPage)->values()->all(), $this->count(), $perPage, $page, $options))
-//                        ->withPath('');
-//                });
-//        }
+        // Enable public conf
+        $theme = "theme." . config('app.theme');
+        $component = "$theme.component";
+        $layouts = "$theme.layouts";
+
+        View::share('theme', $theme);
+        View::share('layouts', $layouts);
+        View::share('component', $component);
 
         Schema::defaultStringLength(191);
     }

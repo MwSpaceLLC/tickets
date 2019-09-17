@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends("$layouts.app")
 
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
 
             @if(Auth::user()->active)
-                @include('component.sidebar')
+                @include("$component.sidebar")
             @endif
 
             <div class="col-md-10">
@@ -28,7 +28,9 @@
                             @foreach(\App\User::paginate(8) as $user)
                                 <tr>
                                     <th scope="row">{{$user->id}}</th>
-                                    <td data-toggle="tooltip" data-placement="top"  class="{{$user->role === 1?'admin':''}}" title="{{$user->role()}}">{{$user->name}}</td>
+                                    <td data-toggle="tooltip" data-placement="top"
+                                        class="{{$user->role === 1?'admin':''}}"
+                                        title="{{$user->role()}}">{{$user->name}}</td>
                                     <td><span
                                             class="badge badge-secondary status-{{$user->active}}">{{$user->active()}}</span>
                                     </td>

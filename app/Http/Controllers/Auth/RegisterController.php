@@ -21,6 +21,16 @@ class RegisterController extends Controller
     |
     */
 
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return view('switch.' . config('app.theme') . '.auth.register');
+    }
+
     use RegistersUsers;
 
     /**

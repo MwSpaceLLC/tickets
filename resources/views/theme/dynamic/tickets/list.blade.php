@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends("$layouts.app")
 
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
 
-            @if(Auth::user()->active)
-                @include('component.sidebar')
+            @if(auth()->user()->active)
+                @include("$component.sidebar")
             @endif
 
             <div class="col-md-10">
@@ -64,13 +64,13 @@
                                 @if(request()->is('tickets/working'))
                                     @if($ticket->replies()->exists())
                                         @if($ticket->replies()->orderBy('created_at', 'desc')->limit(1)->first()->user_id !== auth()->id())
-                                            @include('component.ticket', $ticket)
+                                            @include("$component.ticket", $ticket)
                                         @endif
                                     @else
-                                        @include('component.ticket', $ticket)
+                                        @include("$component.ticket", $ticket)
                                     @endif
                                 @else
-                                    @include('component.ticket', $ticket)
+                                    @include("$component.ticket", $ticket)
                                 @endif
                             @endforeach
                             </tbody>

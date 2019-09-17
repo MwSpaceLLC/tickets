@@ -19,7 +19,7 @@ class HomeController extends Controller
 
     public function welcome()
     {
-        return view('welcome');
+        return view('theme.' . config('app.theme') . '.welcome');
     }
 
     /**
@@ -29,12 +29,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('theme.' . config('app.theme') . '.home');
     }
 
     public function settings()
     {
-        return view('settings');
+        return view('theme.' . config('app.theme') . '.settings');
     }
 
 }

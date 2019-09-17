@@ -69,8 +69,8 @@
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link " href="#" role="button" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false" v-pre>
-                                <div class="avatar role-{{Auth::user()->role}}">
-                                    <span>{{substr(Auth::user()->name, 0, 1)}}</span>
+                                <div class="avatar role-{{auth()->user()->role}}">
+                                    <span>{{substr(auth()->user()->name, 0, 1)}}</span>
                                 </div>
                             </a>
 

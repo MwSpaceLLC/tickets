@@ -11,6 +11,7 @@ No mounthly cost, only deploy app on cloud, & work every u want!
 
 This repo NOT stable, please download at your risk. Public beta will cooming soon at 30/09/2019
 
+
 ### 🥋 Contributing
 Thank you for considering contributing to the Tickets Project, if u want to hep us, 
 u can become a [Patreon] (https://www.patreon.com/user?u=24519588)

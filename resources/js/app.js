@@ -150,7 +150,7 @@ const home_charts = document.getElementById('home-charts');
 if (home_charts) {
 
     var charter = new Chart(home_charts, {
-        type: 'bar',
+        type: 'pie',
         data: {
             labels: home_charts.dataset.labels.split(','),
             datasets: [{

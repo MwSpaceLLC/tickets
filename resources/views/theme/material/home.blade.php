@@ -31,9 +31,11 @@
 
                         <canvas id="home-charts"
                                 data-title="@lang('Tutti i ticket')"
-                                data-colors="#f44336,#53dc58eb,#f0ad4e"
-                                data-labels="Open, Closed, On hold, Reply"
-                                data-set="{{\App\Tickets::where('status',1)->count()}}, {{\App\Tickets::where('status',2)->count()}}, 3, 6"
+                                data-colors="#4caf50,#6c757d"
+                                data-labels="@lang('Aperti'), @lang('Chiusi'), @lang('vuoti')"
+                                data-set="{{\App\Tickets::where('status',1)->count()}},
+                                {{\App\Tickets::where('status',2)->count()}},
+                                {{\App\Tickets::doesnthave('replies')->count()}}"
                                 class="col" width="100%"></canvas>
 
                     </div>

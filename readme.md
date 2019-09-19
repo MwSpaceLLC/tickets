@@ -11,6 +11,19 @@ No mounthly cost, only deploy app on cloud, & work every u want!
 
 This repo NOT stable, please download at your risk. Public beta will cooming soon at 30/09/2019
 
+### 🛒 Requirement
+- composer
+- npm
+- php >=7.2
+- extension=php_fileinfo.dll
+- BCMath PHP Extension
+- Ctype PHP Extension
+- JSON PHP Extension
+- Mbstring PHP Extension
+- OpenSSL PHP Extension
+- PDO PHP Extension
+- Tokenizer PHP Extension
+- XML PHP Extension
 
 ### 🥋 Contributing
 Thank you for considering contributing to the Tickets Project, if u want to hep us, 

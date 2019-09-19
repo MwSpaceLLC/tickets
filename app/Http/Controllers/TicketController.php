@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
+use App\Mail\NewTicket;
 use App\Tickets;
 use App\TicketView;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use function foo\func;
 
 class TicketController extends Controller
@@ -22,8 +25,29 @@ class TicketController extends Controller
 
     public function open(Request $request)
     {
+
+        if (!Department::first()) {
+
+            return abort(503, __('Nessun dipartimento al momento. Torna indietro'));
+        }
+
+        if (!\auth()->user()->department()->first()) {
+
+            return abort(503, __('Non hai accesso a nessun reparto. Torna indietro'));
+        }
+
+        if (!$department = \auth()->user()->department()->where('department_id', $request->department)->first()) {
+
+            return abort(503, __('Non hai accesso a questo reparto. Torna indietro'));
+        }
+
+        if (!$department->write) {
+
+            return abort(503, __('Non hai i permessi di scrittura per il reparto. Torna indietro'));
+        }
+
         $ticket = new Tickets();
-        $ticket->user_id = Auth::id();
+        $ticket->user_id = \auth()->id();
         $ticket->department_id = $request->department;
         $ticket->subject = $request->subject;
         $ticket->save();
@@ -42,8 +66,8 @@ class TicketController extends Controller
         }
 
         $tickets = isset($request->status) ?
-            Tickets::where('status', $request->status)->paginate(8) :
-            Tickets::paginate(8);
+            Tickets::where('status', $request->status)->get() :
+            Tickets::get();
 
         return view('theme.' . config('app.theme') . '.tickets.list')->with('tickets', $tickets);
     }
@@ -52,6 +76,21 @@ class TicketController extends Controller
     {
         $ticket = Tickets::findOrFail($request->id);
 
+        if (!\auth()->user()->department()->first()) {
+
+            return abort(503, __('Non hai accesso a nessun reparto. Torna indietro'));
+        }
+
+        if (!$department = \auth()->user()->department()->where('department_id', $ticket->department()->first()->id)->first()) {
+
+            return abort(503, __('Non hai accesso a questo reparto. Torna indietro'));
+        }
+
+        if (!$department->read) {
+
+            return abort(503, __('Non hai i permessi di lettura per il reparto. Torna indietro'));
+        }
+
         if (!$ticket->views()->where('user_id', Auth::id())->first()) {
             $ticketViews = new TicketView();
             $ticketViews->user_id = Auth::id();
@@ -59,7 +98,10 @@ class TicketController extends Controller
             $ticketViews->save();
         }
 
-        return view('theme.' . config('app.theme') . '.tickets.show')->with('ticket', Tickets::findOrFail($request->id));
+        $ticket = Tickets::findOrFail($request->id);
+
+        Mail::to('alex@mwspace.com')->send(new NewTicket($ticket));
+        return view('theme.' . config('app.theme') . '.tickets.show')->with('ticket', $ticket);
     }
 
     public function close(Request $request)

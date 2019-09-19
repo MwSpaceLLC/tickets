@@ -20,11 +20,9 @@ class NewTicket extends Mailable
     protected $ticket;
 
     /**
-     * Create a new message instance.
-     *
-     * @return void
+     * NewTicket constructor.
+     * @param Tickets $ticket
      */
-
     public function __construct(Tickets $ticket)
     {
         $this->ticket = $ticket;
@@ -38,7 +36,7 @@ class NewTicket extends Mailable
     public function build()
     {
         return $this->from(config('app.from'))
-            ->markdown('emails.tickets.new')
+            ->view('emails.tickets.new')
             ->with('ticket', $this->ticket);
     }
 }

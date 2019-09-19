@@ -1,4 +1,159 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons);* {
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons);.pure-material-checkbox {
+  z-index: 0;
+  position: relative;
+  display: inline-block;
+  color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.87);
+  font-family: var(--pure-material-font, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Input */
+
+.pure-material-checkbox > input {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  z-index: -1;
+  position: absolute;
+  left: -10px;
+  top: -8px;
+  display: block;
+  margin: 0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+  box-shadow: none;
+  outline: none;
+  opacity: 0;
+  transform: scale(1);
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.2s;
+}
+
+/* Span */
+
+.pure-material-checkbox > span {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* Box */
+
+.pure-material-checkbox > span::before {
+  content: "";
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 3px 11px 3px 1px;
+  border: solid 2px;
+  /* Safari */
+  border-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+  border-radius: 2px;
+  width: 18px;
+  height: 18px;
+  vertical-align: top;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+/* Checkmark */
+
+.pure-material-checkbox > span::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 3px;
+  left: 1px;
+  width: 10px;
+  height: 5px;
+  border: solid 2px transparent;
+  border-right: none;
+  border-top: none;
+  transform: translate(3px, 4px) rotate(-45deg);
+}
+
+/* Checked, Indeterminate */
+
+.pure-material-checkbox > input:checked,
+.pure-material-checkbox > input:indeterminate {
+  background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+}
+
+.pure-material-checkbox > input:checked + span::before,
+.pure-material-checkbox > input:indeterminate + span::before {
+  border-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+  background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+}
+
+.pure-material-checkbox > input:checked + span::after,
+.pure-material-checkbox > input:indeterminate + span::after {
+  border-color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
+}
+
+.pure-material-checkbox > input:indeterminate + span::after {
+  border-left: none;
+  transform: translate(4px, 3px);
+}
+
+/* Hover, Focus */
+
+.pure-material-checkbox:hover > input {
+  opacity: 0.04;
+}
+
+.pure-material-checkbox > input:focus {
+  opacity: 0.12;
+}
+
+.pure-material-checkbox:hover > input:focus {
+  opacity: 0.16;
+}
+
+/* Active */
+
+.pure-material-checkbox > input:active {
+  opacity: 1;
+  transform: scale(0);
+  transition: transform 0s, opacity 0s;
+}
+
+.pure-material-checkbox > input:active + span::before {
+  border-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+}
+
+.pure-material-checkbox > input:checked:active + span::before {
+  border-color: transparent;
+  background-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+}
+
+/* Disabled */
+
+.pure-material-checkbox > input:disabled {
+  opacity: 0;
+}
+
+.pure-material-checkbox > input:disabled + span {
+  color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.38);
+  cursor: initial;
+}
+
+.pure-material-checkbox > input:disabled + span::before {
+  border-color: currentColor;
+}
+
+.pure-material-checkbox > input:checked:disabled + span::before,
+.pure-material-checkbox > input:indeterminate:disabled + span::before {
+  border-color: transparent;
+  background-color: currentColor;
+}
+
+body {
+  opacity: 0;
+}
+
+* {
+  font-family: "Nunito", sans-serif;
   border: unset !important;
   text-transform: uppercase;
 }
@@ -114,25 +269,25 @@ td.empty::before {
 }
 
 .reply-ticket {
-  transition: 0.6s;
   position: fixed;
-  bottom: -680px;
+  bottom: -720px;
   right: 10%;
   z-index: 999;
   width: 80%;
   background: white;
   height: 650px;
   box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 -3px 5px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  border-top: 8px solid #009688 !important;
   overflow: auto;
 }
 
 .reply-ticket::before {
   content: "";
   display: block;
-  width: 27px;
+  width: 100%;
   margin: auto;
-  border-top: 3px double #fff;
+  background: #009688;
+  height: 10px;
+  cursor: ns-resize;
 }
 
 .reply-ticket.active {
@@ -143,8 +298,13 @@ td.empty::before {
   box-shadow: unset;
 }
 
-.codex-editor {
-  background: #e9ecef;
+.ce-block__content {
+  position: relative;
+  max-width: 80%;
+}
+
+.ce-toolbar__content {
+  max-width: 80%;
 }
 
 .inner-ticket {
@@ -182,5 +342,114 @@ td.empty::before {
 
 .si-views {
   display: flex;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-center > * {
+  margin: 10px;
+}
+
+.av-role {
+  float: right;
+  zoom: 1.8;
+}
+
+.text-role-2 {
+  color: #E84AB9;
+  font-weight: bold;
+}
+
+.pattern > li {
+  margin: 10px;
+  display: flex;
+}
+
+.navbar-brand-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .navbar-brand {
+    display: none;
+  }
+
+  .navbar-brand-mobile {
+    display: block;
+  }
+
+  .navbar-nav > li {
+    margin: 0.5rem !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-nav > li {
+    margin: 0.2rem !important;
+    zoom: 0.75;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .navbar-nav > li > a {
+    width: 100%;
+  }
+
+  button[type=submit] {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .card-body {
+    overflow-y: auto;
+  }
+
+  .text-role-2 {
+    zoom: 0.7;
+  }
+}
+
+.current {
+  background: #523EE8 !important;
+  color: white !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+button.loading {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+i.spin {
+  -webkit-animation: rotating 1s linear infinite;
+}
+
+@-webkit-keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+.avatar,
+.dip-user-list,
+.dip-user {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.badge {
+  padding: 1em 0.8em;
+  -webkit-clip-path: polygon(49% 22%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 73%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
+          clip-path: polygon(49% 22%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 73%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
 }
 

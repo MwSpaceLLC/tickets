@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Department extends Model
 {
+
+    public function user()
+    {
+        return $this->hasMany('App\DepartmentUser');
+    }
+
     public function tickets()
     {
         return $this->hasMany('App\Tickets');

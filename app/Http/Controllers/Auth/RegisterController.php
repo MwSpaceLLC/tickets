@@ -28,7 +28,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('switch.' . config('app.theme') . '.auth.register');
+        return view('theme.' . config('app.theme') . '.auth.register');
     }
 
     use RegistersUsers;

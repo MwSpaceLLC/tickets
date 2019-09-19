@@ -13,6 +13,8 @@
 
 Route::get('/', 'HomeController@welcome')->name('welcome');
 
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -20,13 +22,17 @@ Route::get('/home', 'HomeController@index')->name('home');
 /** @administration ===================================================== */
 
 Route::middleware(['admincheck','checkroles'])->group(function () {
-    Route::get('/departments', 'AdminController@departments')->middleware('admincheck')->name('departments');
+    Route::get('/departments', 'AdminController@departments')->name('departments');
 
     Route::post('/new/department', 'AdminController@newdepartment')->name('new.departments');
 
     Route::get('/users', 'AdminController@users')->middleware('admincheck')->name('users');
 
-    Route::get('/user/{user}/status/{active}', 'AdminController@userChange')->middleware('admincheck')->name('users');
+    Route::get('/user/{user}/status/{active}', 'AdminController@userChange')->name('users.change');
+
+    Route::get('/user/{user}/manage', 'AdminController@userManage')->name('users.manage');
+
+    Route::post('/user/{user}/update', 'AdminController@userUpdate')->name('users.update');
 
 });
 

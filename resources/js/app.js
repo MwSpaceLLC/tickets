@@ -1,8 +1,12 @@
+import {TweenMax, Power2, TimelineLite} from "gsap/TweenMax";
+import swal from 'sweetalert';
+
+/** @jscolor */
 import './jscolor';
 
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
-})
+});
 
 /**
  * editorjs
@@ -49,12 +53,12 @@ if (codex) {
                 }
             },
 
-            linkTool: {
-                class: LinkTool,
-                config: {
-                    endpoint: '/@editorjs/link', // Your backend endpoint for url data fetching
-                }
-            },
+            // linkTool: {
+            //     class: LinkTool,
+            //     config: {
+            //         endpoint: '/@editorjs/link', // Your backend endpoint for url data fetching
+            //     }
+            // },
 
             attaches: {
                 class: AttachesTool,
@@ -68,28 +72,70 @@ if (codex) {
     });
 
 
-    $('.reply-ticket-btn').click(function () {
-        $('.reply-ticket').toggleClass('active')
+    $('.reply-ticket-open').click(function () {
+        TweenLite.to('.reply-ticket', .3, {bottom: '0px'});
     });
+
+    $('.reply-ticket-close').click(function () {
+        TweenLite.to('.reply-ticket', .3, {bottom: '-720px'});
+    });
+
+    function inreply() {
+        TweenLite.to('.container', .1, {opacity: 0.5});
+
+        TweenLite.to('.reply-ticket', 0.3, {
+            bottom: '-560px',
+        })
+
+        $('.reply-ticket-close').hide();
+        $('.send-reply-ticket').addClass('loading');
+        $('.send-reply-ticket>i')
+            .replaceWith('<i class="material-icons spin"> refresh </i>');
+    }
+
+    function inreplyout() {
+        TweenLite.to('.container', .1, {opacity: 1});
+
+        TweenLite.to('.reply-ticket', 0.3, {
+            bottom: '0px',
+        })
+
+        $('.reply-ticket-close').show();
+        $('.send-reply-ticket').removeClass('loading');
+        $('.send-reply-ticket>i')
+            .replaceWith('<i class="material-icons"> create </i>');
+    }
 
     $('.send-reply-ticket').click(function () {
 
         editor.save().then((outputData) => {
 
+            inreply();
+
             axios.post('/@editorjs/save/ticket/' + codex.dataset.ticket, {
                 data: outputData
             })
-                .then(function (response) {
-                    $('.reply-ticket').toggleClass('active').promise().done(function () {
-                        location.reload();
-                    });
+                .then(response => {
+                    TweenLite.to('body', .1, {opacity: 0.5});
+
+                    TweenLite.to('.reply-ticket', 0.3, {
+                        bottom: '-720px',
+                        onComplete: () => {
+                            location.reload();
+                        }
+                    })
                 })
-                .catch(function (error) {
-                    console.log(error);
+                .catch((error) => {
+                    swal(error.response.statusText, error.response.data.message, "error");
+                    console.log('Saving failed: ', error.response)
+                    inreplyout();
                 });
 
         }).catch((error) => {
-            console.log('Saving failed: ', error)
+            swal(error.response.statusText, error.response.data.message, "error");
+            console.log('Saving failed: ', error.response)
+            console.log('Saving failed: ', error.response)
+            inreplyout();
         });
 
     })
@@ -101,7 +147,7 @@ var Chart = require('chart.js');
 
 const home_charts = document.getElementById('home-charts');
 
-if(home_charts){
+if (home_charts) {
 
     var charter = new Chart(home_charts, {
         type: 'bar',
@@ -124,5 +170,44 @@ if(home_charts){
             }
         }
     });
-
 }
+
+//Custom fade In
+document.addEventListener('DOMContentLoaded', () => {
+    TweenLite.to('body', .3, {opacity: 1})
+});
+
+//prevent change page fade
+document.querySelectorAll('a').forEach(element => {
+    if (element.href) {
+        element.addEventListener('click', e => {
+            e.preventDefault();
+            TweenLite.to('body', .3, {
+                opacity: 0, onComplete: () => {
+                    location.href = element.href
+                }
+            })
+        })
+    }
+});
+
+//prevent submit with animate
+document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        var submit = $(form).find(':submit');
+        var icon = $(form).find(':submit>i');
+
+        if (icon) {
+            submit.addClass('loading');
+            icon.replaceWith('<i class="material-icons spin"> refresh </i>')
+                .promise(form.submit());
+        } else {
+            submit.addClass('loading');
+            submit.append('<i class="material-icons spin"> refresh </i>')
+                .promise(form.submit());
+        }
+
+    });
+});

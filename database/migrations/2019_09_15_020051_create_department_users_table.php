@@ -21,6 +21,11 @@ class CreateDepartmentUsersTable extends Migration
 
             $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments');
+
+            $table->boolean('write')->default(0);
+            $table->boolean('read')->default(0);
+            $table->boolean('listen')->default(0);
+
             $table->timestamps();
         });
     }

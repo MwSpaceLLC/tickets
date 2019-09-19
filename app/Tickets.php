@@ -25,6 +25,11 @@ class Tickets extends Model
         return $this->hasMany('App\TicketReply', 'ticket_id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
     public function status()
     {
         switch ($this->status) {

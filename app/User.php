@@ -37,6 +37,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function department()
+    {
+        return $this->hasMany('App\DepartmentUser');
+    }
+
     public function tickets()
     {
         return $this->hasMany('App\Tickets');
@@ -67,5 +72,10 @@ class User extends Authenticatable
                 return __('attivo');
                 break;
         }
+    }
+
+    public function admin()
+    {
+        return $this->role === 1;
     }
 }

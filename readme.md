@@ -62,3 +62,12 @@ Other Futures cooming soon !
 
 With git, u can update the core. if this repo are Stable, or Beta u can easily update code from git command "pull"
 
+    // Install Vendors...
+    composer update
+    
+    // Update the db strutture...
+    php tickets migrate
+    
+    // Update the db strutture...
+    php tickets optimize
+

@@ -203,11 +203,12 @@ SESSION_LIFETIME=120
 EOF;
         if (isset($this->e->mail)) {
             $env .= <<<EOF
+
 MAIL_DRIVER={$this->e->mail}
 MAIL_HOST={$this->e->mailhost}
 MAIL_PORT={$this->e->mailport}
 MAIL_USERNAME={$this->e->mailuser}
-MAIL_PASSWORD={$this->e->mailpass}
+MAIL_PASSWORD="{$this->e->mailpass}"
 MAIL_ENCRYPTION={$this->e->enctype}
 EOF;
 

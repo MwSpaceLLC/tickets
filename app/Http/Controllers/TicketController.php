@@ -100,7 +100,6 @@ class TicketController extends Controller
 
         $ticket = Tickets::findOrFail($request->id);
 
-        Mail::to('alex@mwspace.com')->send(new NewTicket($ticket));
         return view('theme.' . config('app.theme') . '.tickets.show')->with('ticket', $ticket);
     }
 

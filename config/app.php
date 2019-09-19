@@ -1,21 +1,32 @@
 <?php
 
+use Illuminate\Support\Str;
+
 return [
 
     /*
     |--------------------------------------------------------------------------
     | Application Name
     |--------------------------------------------------------------------------
-    |
-    | This value is the name of your application. This value is used when the
-    | framework needs to place the application's name in a notification or
-    | any other location as required by the application or its packages.
-    |
     */
 
     'name' => env('APP_NAME', 'Tickets'),
 
-    'from' => env('APP_FROM', 'info@localhost'),
+    /*
+    |--------------------------------------------------------------------------
+    | Application Name
+    |--------------------------------------------------------------------------
+    | This value validate the request for the register page
+    */
+
+    'passcode' => env('APP_PASSCODE', md5(Str::random(4))),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Theme
+    |--------------------------------------------------------------------------
+    | This value set the default theme for the app
+    */
 
     'theme' => 'material',
 

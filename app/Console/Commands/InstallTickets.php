@@ -176,6 +176,8 @@ class InstallTickets extends Command
 
         $composer = (object)json_decode(file_get_contents(base_path('composer.json')), true);
 
+        $this->e->passcode = md5(Str::random(8));
+
         $env = <<<EOF
 APP_VERSION=$composer->version
 APP_NAME=Tickets
@@ -184,7 +186,7 @@ APP_KEY=
 APP_DEBUG=true
 APP_SSL=true
 APP_URL={$this->e->domain}
-APP_FROM=root@local.com
+APP_PASSCODE={$this->e->passcode}
 
 LOG_CHANNEL=stack
 

@@ -57,7 +57,21 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control " name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="pass-code" class="col-md-4 col-form-label text-md-right">{{ __('Enter Passcode') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="pass-code" type="password" class="form-control @error('passcode') is-invalid @enderror" name="passcode" required>
+
+                                @error('passcode')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 

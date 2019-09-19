@@ -26,7 +26,17 @@ U can deploy on cPanel as git version control, or container with docker, in clou
 
 so u must login as user in to ssh & cd in your project:
 
+    // Install Vendors...
     composer install
+    
+    // Install system...
+    php tickets install
+   
+    // Run all Mix tasks and minify output...
+    npm run production
+
+    // Optimize for relese...
+    php tickets optimize
 
 If u have any problem, please first read the Laravel's guide =)
 

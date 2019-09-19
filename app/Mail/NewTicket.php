@@ -35,7 +35,7 @@ class NewTicket extends Mailable
      */
     public function build()
     {
-        return $this->from(config('app.from'))
+        return $this
             ->view('emails.tickets.new')
             ->with('ticket', $this->ticket);
     }

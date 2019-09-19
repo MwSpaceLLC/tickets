@@ -43,6 +43,9 @@ If u have any problem, please first read the Laravel's guide =)
 ### 🔫 Trick & Knows
 
 U 19/09/19
+- Register passcode (check APP_PASSCODE)
+
+U 19/09/19
 - Control Read, Write, Listen Permission
 
 N relese

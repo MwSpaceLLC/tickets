@@ -96,6 +96,7 @@ class InstallTickets extends Command
 
         } catch (\Exception $exception) {
             return $this->error("SYSTEM DATABASE ERROR: " . $exception->getMessage());
+            die();
 
         }
 

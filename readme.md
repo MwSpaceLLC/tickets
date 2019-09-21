@@ -44,13 +44,13 @@ so u must login as user in to ssh & cd in your project:
     composer install
     
     // Install system...
-    php tickets install
+    php tik install
    
     // Run all Mix tasks and minify output...
     npm run production
 
     // Optimize for relese...
-    php tickets optimize
+    php tik optimize
 
 If u have any problem, please first read the Laravel's guide =)
 
@@ -83,8 +83,8 @@ With git, u can update the core. if this repo are Stable, or Beta u can easily u
     composer update
     
     // Update the db strutture...
-    php tickets migrate
+    php tik migrate
     
     // Update the db strutture...
-    php tickets optimize
+    php tik optimize
 

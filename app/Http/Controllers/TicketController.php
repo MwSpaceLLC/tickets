@@ -127,6 +127,12 @@ class TicketController extends Controller
 
     public function changeDp(Request $request){
 
+        if(\auth()->user()->admin()){
+            $oldTicket = Tickets::findOrFail($request->ticket);
+        } else {
+            $oldTicket = \auth()->user()->tickets()->findOrFail($request->ticket);
+        }
+        
         $oldTicket = \auth()->user()->tickets()->findOrFail($request->ticket);
         $oldReply = $oldTicket->replies()->findOrFail($request->reply);
 

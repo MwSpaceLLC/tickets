@@ -92,9 +92,9 @@ class EditorjsController extends Controller
 
         $ticket = Tickets::findOrFail($request->id);
 
-        if($ticket->whereHas('department', function ($query) {
-                $query->where('status', 0);
-            })->first()){
+        if ($ticket->whereHas('department', function ($query) {
+            $query->where('status', 0);
+        })->first()) {
 
             return response()->json(['message' => __('il reparto in questione è momentaneamente non disponibile')], 403);
         }
@@ -123,12 +123,18 @@ class EditorjsController extends Controller
         $author = Tickets::find($request->id)->user()->first();
         $ticket = Tickets::find($request->id);
 
-        $notSelf = \auth()->id() !== $author->id;
+        $notAuthor = \auth()->id() !== $author->id;
 
-        if ($notSelf) {
+        if ($notAuthor) {
+            /**
+             * Send mail to ticket request mail author
+             */
             Mail::to($author->email)->send(new NewTicket($ticket));
         } else {
 
+            /**
+             * Send mail to all listener peaple
+             */
             $users = User::all();
             $department = $ticket->department()->first();
             foreach ($users as $user) {

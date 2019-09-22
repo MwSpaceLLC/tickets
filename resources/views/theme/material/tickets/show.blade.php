@@ -39,7 +39,7 @@
 
 
 
-                            @if($ticket->user()->find(auth()->id())||  auth()->user()->admin())
+                            @if($ticket->user()->find(auth()->id()) || auth()->user()->admin())
 
                                 <div data-toggle="modal" data-target="#change-dp" data-ticket="{{$ticketsReplies->ticket()->first()->id}}" data-id="{{$ticketsReplies->id}}">
                                     <div class="change-dep cursor-pointer"

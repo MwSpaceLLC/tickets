@@ -2,11 +2,6 @@
 
 namespace App\Providers;
 
-use App\Tickets;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
@@ -36,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         if (request()->getHost() !== '127.0.0.1' && config('app.ssl')) {
-            URL::forceSchema('https');
+            \URL::forceSchema('https');
         }
 
         // Enable public conf

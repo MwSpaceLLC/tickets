@@ -136,7 +136,7 @@ class TicketController extends Controller
         $oldReply = $oldTicket->replies()->findOrFail($request->reply);
 
         $ticket = new Tickets();
-        $ticket->user_id = \auth()->id();
+        $ticket->user_id = $oldTicket->user()->first()->id;
         $ticket->department_id = $request->department;
         $ticket->subject = $request->subject;
         $ticket->save();

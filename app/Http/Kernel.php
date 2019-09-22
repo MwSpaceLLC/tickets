@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
 
         'checkroles' => \App\Http\Middleware\CheckRoles::class,
         'admincheck' => \App\Http\Middleware\AdminCheck::class,
+        'test' => \App\Http\Middleware\Test::class,
     ];
 
     /**

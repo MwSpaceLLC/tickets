@@ -8,6 +8,7 @@ use App\TicketReply;
 use App\Tickets;
 use App\TicketsAttach;
 use App\User;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -65,8 +66,6 @@ class EditorjsController extends Controller
 
     public function link(Request $request)
     {
-//        return Log::info($request);
-
         $OpenGraph = new OpenGraph();
 
         $data = (object)$OpenGraph->fetch($request->url);
@@ -92,6 +91,13 @@ class EditorjsController extends Controller
         }
 
         $ticket = Tickets::findOrFail($request->id);
+
+        if($ticket->whereHas('department', function ($query) {
+                $query->where('status', 0);
+            })->first()){
+
+            return response()->json(['message' => __('il reparto in questione è momentaneamente non disponibile')], 403);
+        }
 
         if (!$department = $ticket->department()->first()->user()->where('user_id', auth()->id())->first()) {
 

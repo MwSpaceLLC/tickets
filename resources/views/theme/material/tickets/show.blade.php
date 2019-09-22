@@ -33,6 +33,25 @@
                     <div class="card inner-ticket">
                         <div class="card-body">
 
+                            <div class="tickid">
+                                @lang('data di inserimento'): {{$ticketsReplies->created_at->format(config('app.format'))}}
+                            </div>
+
+
+
+                            @if($ticket->user()->find(auth()->id())||  auth()->user()->admin())
+
+                                <div data-toggle="modal" data-target="#change-dp" data-ticket="{{$ticketsReplies->ticket()->first()->id}}" data-id="{{$ticketsReplies->id}}">
+                                    <div class="change-dep cursor-pointer"
+                                         data-toggle="tooltip" data-placement="bottom"
+                                         title="@lang('Sposta in un nuovo ticket')">
+                                        <i class="material-icons">
+                                            exit_to_app
+                                        </i>
+                                    </div>
+                                </div>
+                                @endif
+
                             <span data-toggle="tooltip" data-placement="bottom"
                                   title="{{$ticketsReplies->user()->first()->name}}"
                                   class="dip-user role-{{$ticketsReplies->user()->first()->role}}">
@@ -169,4 +188,50 @@
         </div>
     </div>
 
+
+
+
+    <div class="modal fade" id="change-dp" tabindex="-1" role="dialog" aria-labelledby="change-dp" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <form action="/tickets/change/dp" method="post">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="change-dp">@lang('Sposta in un nuovo ticket')</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="reply" name="reply" value="">
+                        <input type="hidden" id="ticket" name="ticket" value="">
+                        <input name="subject" value="" class="form-control"
+                               placeholder="@lang('titolo del nuovo ticket')" required>
+                        <select class="form-control" name="department" required>
+                            @foreach(\App\Department::all() as $department)
+                                <option value="{{$department->id}}">@lang($department->title)</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
+
+@section('js')
+    <script>
+        $('#change-dp').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var ticket = button.data('ticket') // Extract info from data-* attributes
+            var reply = button.data('id') // Extract info from data-* attributes
+            var modal = $(this);
+            modal.find('#ticket').val(ticket);
+            modal.find('#reply').val(reply);
+        })
+    </script>
+    @endsection

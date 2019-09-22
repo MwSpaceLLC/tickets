@@ -103,6 +103,7 @@
     </main>
 
 </div>
+@yield('js')
 <script type="application/javascript">
     const selector = document
         .querySelector('[href="/{{request()->path()}}"]');

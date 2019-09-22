@@ -56,6 +56,11 @@ If u have any problem, please first read the Laravel's guide =)
 
 ### 🔫 Trick & Knows
 
+U 22/09/19
+- Department status
+- change reply in new ticket (this real powerfull)
+- department user management
+
 U 19/09/19
 - Register passcode (check APP_PASSCODE)
 

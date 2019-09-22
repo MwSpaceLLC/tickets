@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Department;
+use App\Mail\NewTicket;
+use App\Tickets;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -35,6 +38,12 @@ class HomeController extends Controller
     public function settings()
     {
         return view('theme.' . config('app.theme') . '.settings');
+    }
+
+    public function testmail(Request $request)
+    {
+        Mail::to($request->email)->send(new NewTicket(Tickets::first()));
+
     }
 
 }

@@ -11,6 +11,11 @@ class TicketReply extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function ticket()
+    {
+        return $this->belongsTo('App\Tickets', 'ticket_id');
+    }
+
     protected $fillable = [
         'created_at'
     ];

@@ -21,13 +21,10 @@ class Department extends Model
     {
         switch ($this->status) {
             case 0:
-                return __('Bozza');
+                return __('chiuso');
                 break;
             case 1:
                 return __('Operativo');
-                break;
-            case 2:
-                return __('Chiuso');
                 break;
         }
     }

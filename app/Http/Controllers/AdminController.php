@@ -72,7 +72,7 @@ class AdminController extends Controller
         /**
          * @force reset role
          */
-        $user->department()->where('user_id',$user->id)->delete();
+        $user->department()->where('user_id', $user->id)->delete();
 
 
         if (!$request->department) {
@@ -110,6 +110,22 @@ class AdminController extends Controller
 
         return back();
 
+    }
+
+    public function departmentChange(Request $request)
+    {
+        $department = Department::findOrFail($request->department);
+        $department->status = !$request->status;
+        $department->save();
+        return back();
+    }
+
+    public function departmentManage(Request $request)
+    {
+        $department = Department::findOrFail($request->department);
+
+        return view('theme.' . config('app.theme') . '.department')
+            ->with('department', $department);
     }
 
 }

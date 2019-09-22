@@ -19,6 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::middleware(['test'])->group(function () {
+
+    Route::get('/test.mail.ticket.reply/{email}', 'HomeController@testmail')->name('test.mail.ticket.reply');
+
+});
+
 /** @administration ===================================================== */
 
 Route::middleware(['admincheck','checkroles'])->group(function () {
@@ -26,7 +32,11 @@ Route::middleware(['admincheck','checkroles'])->group(function () {
 
     Route::post('/new/department', 'AdminController@newdepartment')->name('new.departments');
 
-    Route::get('/users', 'AdminController@users')->middleware('admincheck')->name('users');
+    Route::get('/department/{department}/status/{status}', 'AdminController@departmentChange')->name('department.change');
+
+    Route::get('/department/{department}/manage', 'AdminController@departmentManage')->name('department.manage');
+
+    Route::get('/users', 'AdminController@users')->name('users');
 
     Route::get('/user/{user}/status/{active}', 'AdminController@userChange')->name('users.change');
 
@@ -58,6 +68,9 @@ Route::middleware('checkroles')->group(function () {
     Route::get('/tickets/{status?}', 'TicketController@list')->name('ticket.list');
 
     Route::get('/ticket/{id}', 'TicketController@show')->name('ticket.show');
+
+    Route::post('/tickets/change/dp', 'TicketController@changeDp')->name('ticket.change');
+
 
     /** @tickets ===================================================== */
 

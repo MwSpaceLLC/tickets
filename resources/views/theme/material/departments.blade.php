@@ -48,6 +48,8 @@
                                 <th scope="col">@lang('utenti')</th>
                                 <th scope="col">@lang('tickets')</th>
                                 <th scope="col">@lang('creazione')</th>
+                                <th scope="col">@lang('stato')</th>
+                                <th scope="col">@lang('utenti')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -59,6 +61,21 @@
                                     <td >{{$department->user()->groupBy('user_id')->count()}}</td>
                                     <td>{{$department->tickets()->count()}}</td>
                                     <td>{{$department->created_at->diffForHumans()}}</td>
+                                    <td>
+                                        <label class="pure-material-switch"
+                                               onchange="location.href='/department/{{$department->id}}/status/{{$department->status}}'">
+                                            <input type="checkbox" {{$department->status?'checked':''}}>
+                                            <span></span>
+                                        </label>
+                                    </td>
+                                    <td><a href="/department/{{$department->id}}/manage"
+                                           title="@lang('gestione utenti')"
+                                           class="btn btn-sm btn-secondary">
+                                            <i class="material-icons">
+                                                recent_actors
+                                            </i>
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

@@ -17,8 +17,8 @@
                                 <th scope="col">@lang('stato')</th>
                                 <th scope="col">@lang('tickets')</th>
                                 <th scope="col">@lang('creazione')</th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
+                                <th scope="col">@lang('accesso')</th>
+                                <th scope="col">@lang('permessi')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -29,27 +29,23 @@
                                         class="{{$user->role === 1?'admin':''}}"
                                         title="{{$user->role()}}">{{$user->name}}</td>
                                     <td><span
-                                            class="badge badge-secondary status-{{$user->active}}">{{$user->active()}}</span>
+                                                class="badge badge-secondary status-{{$user->active}}">{{$user->active()}}</span>
                                     </td>
                                     <td>{{$user->tickets()->count()}}</td>
                                     <td>{{$user->created_at->diffForHumans()}}</td>
-                                    <td><a href="/user/{{$user->id}}/status/{{$user->active}}"
-                                           title="{{$user->active?'disattiva':'attiva'}}"
-                                           class="btn btn-sm {{$user->active?'btn-success':'btn-warning'}}">
-
-                                            @if($user->active)
-                                                <i class="material-icons">
-                                                    lock_open
-                                                </i>
-                                            @else
-                                                <i class="material-icons">
-                                                    lock
-                                                </i>
-                                            @endif
-                                        </a>
-                                    </td>
+                                    @if(!$user->admin())
+                                        <td>
+                                            <label class="pure-material-switch"
+                                                   onchange="location.href='/user/{{$user->id}}/status/{{$user->active}}'">
+                                                <input type="checkbox" {{$user->active?'checked':''}}>
+                                                <span></span>
+                                            </label>
+                                        </td>
+                                        @else
+                                        <td></td>
+                                        @endif
                                     <td><a href="/user/{{$user->id}}/manage"
-                                           title="gestione permessi"
+                                           title="@lang('gestione permessi')"
                                            class="btn btn-sm btn-secondary">
                                             <i class="material-icons">
                                                 recent_actors

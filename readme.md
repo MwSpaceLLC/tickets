@@ -47,7 +47,7 @@ so u must login as user in to ssh & cd in your project:
     php tik install
    
     // Run all Mix tasks and minify output...
-    npm run production
+    npm install & npm run production
 
     // Optimize for relese...
     php tik optimize

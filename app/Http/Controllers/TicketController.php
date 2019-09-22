@@ -132,8 +132,7 @@ class TicketController extends Controller
         } else {
             $oldTicket = \auth()->user()->tickets()->findOrFail($request->ticket);
         }
-        
-        $oldTicket = \auth()->user()->tickets()->findOrFail($request->ticket);
+
         $oldReply = $oldTicket->replies()->findOrFail($request->reply);
 
         $ticket = new Tickets();

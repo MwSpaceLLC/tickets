@@ -30,10 +30,6 @@ class AppServiceProvider extends ServiceProvider
             $this->chackSet();
         }
 
-        if (request()->getHost() !== '127.0.0.1' && config('app.ssl')) {
-            \URL::forceSchema('https');
-        }
-
         // Enable public conf
         $theme = "theme." . config('app.theme');
         $component = "$theme.component";

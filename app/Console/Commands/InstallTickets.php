@@ -105,6 +105,8 @@ class InstallTickets extends Command
 
         Artisan::call('migrate');
 
+        Artisan::call('storage:link');
+
         $user = new User();
         $user->name = $this->e->adminUser;
         $user->email = "{$this->e->adminUser}@admin.com";

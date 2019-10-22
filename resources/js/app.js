@@ -26,7 +26,7 @@ function inreply() {
     TweenLite.to('.container', .1, {opacity: 0.5});
 
     TweenLite.to('.reply-ticket', 0.3, {
-        bottom: '-560px',
+        bottom: '-860px',
     })
 
     $('.reply-ticket-close').hide();

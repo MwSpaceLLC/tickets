@@ -619,7 +619,7 @@
                                                         class="textCenter">
                                                         <p>@lang('Allegato'): {{$rowclear['data']['title']}}</p>
                                                     </td>
-                                                </tr>
+                                                 </tr>
                                                 @break
 
                                                 @case('tiny')

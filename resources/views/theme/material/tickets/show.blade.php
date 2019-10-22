@@ -226,7 +226,7 @@
 @section('js')
     <script rel="script" type="application/javascript">
         $('#body-tid a').each(function () {
-            $(this).attr('target', '_blank');
+            $(this).addClass('_blank');
         });
 
         $('#change-dp').on('show.bs.modal', function (event) {

@@ -180,8 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
 document.querySelectorAll('a').forEach(element => {
     if (element.href) {
         element.addEventListener('click', e => {
-            if (element.getAttribute('target') && element.getAttribute('target') === '_blank') {
-                window.open(element.href, "element.href", "width=" + screen.availWidth + ",height=" + screen.availHeight)
+            if (element.classList.contains('_blank')) {
+                window.open(element.href, element.href, "width=" + screen.availWidth + ",height=" + screen.availHeight)
             } else {
                 e.preventDefault();
                 TweenLite.to('body', .3, {

@@ -251,7 +251,7 @@ if (tinyeditor) {
         })
             .then(response => {
 
-                return console.log(response);
+                console.log(response)
 
                 TweenLite.to('body', .1, {opacity: 0.5});
 

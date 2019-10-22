@@ -178,17 +178,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //prevent change page fade
 document.querySelectorAll('a').forEach(element => {
-    if (element.href && element.getAttribute('target') !== '_blank') {
+    if (element.href) {
         element.addEventListener('click', e => {
-            e.preventDefault();
-            TweenLite.to('body', .3, {
-                opacity: 0, onComplete: () => {
-                    location.href = element.href
-                }
-            })
+            if (element.getAttribute('target') && element.getAttribute('target') === '_blank') {
+                window.open(element.href, "element.href", "width=" + screen.availWidth + ",height=" + screen.availHeight)
+            } else {
+                e.preventDefault();
+                TweenLite.to('body', .3, {
+                    opacity: 0, onComplete: () => {
+                        location.href = element.href
+                    }
+                })
+            }
         })
-    } else {
-        window.open(element.href, "element.href", "width="+screen.availWidth+",height="+screen.availHeight)
     }
 });
 
@@ -265,9 +267,17 @@ if (tinyeditor) {
                 })
             })
             .catch((error) => {
+
                 swal(error.response.statusText, error.response.data.message, "error");
-                console.log('Saving failed: ', error.response)
-                inreplyout();
+
+                TweenLite.to('body', .1, {opacity: 0.5});
+
+                TweenLite.to('.reply-ticket', 0.3, {
+                    bottom: '-1220px',
+                    onComplete: () => {
+                        location.reload();
+                    }
+                })
             });
     }
 

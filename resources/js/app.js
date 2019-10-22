@@ -22,6 +22,32 @@ const axios = require('axios');
 
 const codex = document.getElementById('codex-editor');
 
+function inreply() {
+    TweenLite.to('.container', .1, {opacity: 0.5});
+
+    TweenLite.to('.reply-ticket', 0.3, {
+        bottom: '-560px',
+    })
+
+    $('.reply-ticket-close').hide();
+    $('.send-reply-ticket').addClass('loading');
+    $('.send-reply-ticket>i')
+        .replaceWith('<i class="material-icons spin"> refresh </i>');
+}
+
+function inreplyout() {
+    TweenLite.to('.container', .1, {opacity: 1});
+
+    TweenLite.to('.reply-ticket', 0.3, {
+        bottom: '0px',
+    })
+
+    $('.reply-ticket-close').show();
+    $('.send-reply-ticket').removeClass('loading');
+    $('.send-reply-ticket>i')
+        .replaceWith('<i class="material-icons"> create </i>');
+}
+
 if (codex) {
 
     // const editor = new EditorJS({
@@ -79,32 +105,6 @@ if (codex) {
     $('.reply-ticket-close').click(function () {
         TweenLite.to('.reply-ticket', .3, {bottom: '-720px'});
     });
-
-    function inreply() {
-        TweenLite.to('.container', .1, {opacity: 0.5});
-
-        TweenLite.to('.reply-ticket', 0.3, {
-            bottom: '-560px',
-        })
-
-        $('.reply-ticket-close').hide();
-        $('.send-reply-ticket').addClass('loading');
-        $('.send-reply-ticket>i')
-            .replaceWith('<i class="material-icons spin"> refresh </i>');
-    }
-
-    function inreplyout() {
-        TweenLite.to('.container', .1, {opacity: 1});
-
-        TweenLite.to('.reply-ticket', 0.3, {
-            bottom: '0px',
-        })
-
-        $('.reply-ticket-close').show();
-        $('.send-reply-ticket').removeClass('loading');
-        $('.send-reply-ticket>i')
-            .replaceWith('<i class="material-icons"> create </i>');
-    }
 
     $('.send-reply-ticket').click(function () {
 
@@ -243,6 +243,8 @@ if (tinyeditor) {
 
     function tinyReply() {
 
+        inreply();
+
         var ticket = document.getElementById('ticket');
 
         axios.post('/@tiny/save/ticket/' + ticket.dataset.tid, {
@@ -255,7 +257,7 @@ if (tinyeditor) {
         })
             .then(response => {
 
-                console.log(response)
+                console.log(response);
 
                 TweenLite.to('body', .1, {opacity: 0.5});
 
@@ -270,14 +272,8 @@ if (tinyeditor) {
 
                 swal(error.response.statusText, error.response.data.message, "error");
 
-                TweenLite.to('body', .1, {opacity: 0.5});
+                inreplyout();
 
-                TweenLite.to('.reply-ticket', 0.3, {
-                    bottom: '-1220px',
-                    onComplete: () => {
-                        location.reload();
-                    }
-                })
             });
     }
 

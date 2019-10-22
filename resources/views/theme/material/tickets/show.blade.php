@@ -231,6 +231,7 @@
 
         $('#body-tid img').each(function () {
             $(this).css('width', '100%');
+            $(this).css('object-fit', 'contain');
         });
 
         $('#change-dp').on('show.bs.modal', function (event) {

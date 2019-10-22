@@ -11,12 +11,10 @@ body {
 * {
   font-family: 'Nunito', sans-serif;
   border: unset !important;
-  text-transform: uppercase;
 }
 
-.inner-ticket > .card-body, .codex-editor__redactor, #codex-editor, .ce-paragraph, .ce-block__content,
-.inner-ticket > .card-body > * {
-  text-transform: none !important;
+.head-black {
+  text-transform: uppercase;
 }
 
 .dip-color {
@@ -128,12 +126,12 @@ td.empty::before {
 
 .reply-ticket {
   position: fixed;
-  bottom: -720px;
+  bottom: -1220px;
   right: 10%;
   z-index: 999;
   width: 80%;
-  background: white;
-  height: 650px;
+  background: #fafafa;
+  height: calc(100vh - 80px);
   box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 -3px 5px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   overflow: auto;
 
@@ -146,6 +144,15 @@ td.empty::before {
     height: 10px;
     cursor: ns-resize;
   }
+}
+
+.tox-statusbar__branding {
+  display: none;
+}
+
+.tox .tox-edit-area__iframe {
+  background-color: white !important;
+  border-radius: .3rem;
 }
 
 .reply-ticket.active {
@@ -322,4 +329,8 @@ i.spin {
   bottom: 10px;
   right: 10px;
   color: #0c5460;
+}
+
+.inner-ticket > .card-body > * {
+  text-transform: none !important;
 }

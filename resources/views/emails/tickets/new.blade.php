@@ -515,15 +515,18 @@
                                         <tr>
                                             <td height="80" valign="middle" width="33%"
                                                 style="font-family: 'proxima_nova_softmedium', Myriad Pro, Helvetica, Arial, sans-serif; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">
-                                                <a href="{{url("ticket/{$ticket->id}")}}" style="text-decoration: none; color: rgb(69,69,69);">@lang('Rispondi')</a>
+                                                <a href="{{url("ticket/{$ticket->id}")}}"
+                                                   style="text-decoration: none; color: rgb(69,69,69);">@lang('Rispondi')</a>
                                             </td>
                                             <td valign="middle" width="33%"
                                                 style="font-family: 'proxima_nova_softmedium', Myriad Pro, Helvetica, Arial, sans-serif; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">
-                                                <a href="#!" style="text-decoration: none; color: rgb(69,69,69);">@lang('Segnala')</a>
+                                                <a href="#!"
+                                                   style="text-decoration: none; color: rgb(69,69,69);">@lang('Segnala')</a>
                                             </td>
                                             <td valign="middle" width="33%"
                                                 style="font-family: 'proxima_nova_softmedium', Myriad Pro, Helvetica, Arial, sans-serif; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">
-                                                <a href="{{url("status/2/ticket/{$ticket->id}")}}" style="text-decoration: none; color: rgb(69,69,69);">@lang('Chiudi')</a>
+                                                <a href="{{url("status/2/ticket/{$ticket->id}")}}"
+                                                   style="text-decoration: none; color: rgb(69,69,69);">@lang('Chiudi')</a>
                                             </td>
                                         </tr>
                                     </table>
@@ -660,9 +663,13 @@
                                                     <td width="100%"
                                                         style="font-size: 14px; color: rgb(158, 158, 158); text-align: left; font-family: proxima_nova_softregular, Helvetica, Arial, sans-serif; line-height: 24px; vertical-align: top;"
                                                         class="textCenter">
-                                                        <p>@lang('Allegato'): {{$datasine['data']['title']}}</p>
+                                                        <p>@lang('Allegato'): {{$rowclear['data']['title']}}</p>
                                                     </td>
                                                 </tr>
+                                                @break
+
+                                                @case('tiny')
+                                                {!! $rowclear['data'] !!}
                                                 @break
 
                                                 @default
@@ -757,20 +764,20 @@
                                 <td width="100" class="w30"></td>
                                 <td width="14" style="text-align: center;">
                                     <a href="#" style="text-decoration: none;"><img
-                                            src="{{url('')}}/mail/theme/enity/images/social_icon1.png" width="14"
-                                            height="auto;" alt="" border="0" style="width: 14px;"></a>
+                                                src="{{url('')}}/mail/theme/enity/images/social_icon1.png" width="14"
+                                                height="auto;" alt="" border="0" style="width: 14px;"></a>
                                 </td>
                                 <td width="40"></td>
                                 <td width="14" style="text-align: center;">
                                     <a href="#" style="text-decoration: none;"><img
-                                            src="{{url('')}}/mail/theme/enity/images/social_icon2.png" width="14"
-                                            height="auto;" alt="" border="0" style="width: 14px;"></a>
+                                                src="{{url('')}}/mail/theme/enity/images/social_icon2.png" width="14"
+                                                height="auto;" alt="" border="0" style="width: 14px;"></a>
                                 </td>
                                 <td width="40"></td>
                                 <td width="14" style="text-align: center;">
                                     <a href="#" style="text-decoration: none;"><img
-                                            src="{{url('')}}/mail/theme/enity/images/social_icon3.png" width="14"
-                                            height="auto;" alt="" border="0" style="width: 14px;"></a>
+                                                src="{{url('')}}/mail/theme/enity/images/social_icon3.png" width="14"
+                                                height="auto;" alt="" border="0" style="width: 14px;"></a>
                                 </td>
                                 <td width="18" class="w30"></td>
                             </tr>
@@ -794,20 +801,20 @@
                                 <td width="18" class="w30"></td>
                                 <td width="14" style="text-align: center;">
                                     <a href="#" style="text-decoration: none;"><img
-                                            src="{{url('')}}/mail/theme/enity/images/social_icon4.png" width="14"
-                                            height="auto;" alt="" border="0" style="width: 14px;"></a>
+                                                src="{{url('')}}/mail/theme/enity/images/social_icon4.png" width="14"
+                                                height="auto;" alt="" border="0" style="width: 14px;"></a>
                                 </td>
                                 <td width="40"></td>
                                 <td width="14" style="text-align: center;">
                                     <a href="#" style="text-decoration: none;"><img
-                                            src="{{url('')}}/mail/theme/enity/images/social_icon5.png" width="14"
-                                            height="auto;" alt="" border="0" style="width: 14px;"></a>
+                                                src="{{url('')}}/mail/theme/enity/images/social_icon5.png" width="14"
+                                                height="auto;" alt="" border="0" style="width: 14px;"></a>
                                 </td>
                                 <td width="40"></td>
                                 <td width="14" style="text-align: center;">
                                     <a href="#" style="text-decoration: none;"><img
-                                            src="{{url('')}}/mail/theme/enity/images/social_icon6.png" width="14"
-                                            height="auto;" alt="" border="0" style="width: 14px;"></a>
+                                                src="{{url('')}}/mail/theme/enity/images/social_icon6.png" width="14"
+                                                height="auto;" alt="" border="0" style="width: 14px;"></a>
                                 </td>
                                 <td width="100" class="w30"></td>
                             </tr>

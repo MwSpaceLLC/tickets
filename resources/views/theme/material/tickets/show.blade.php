@@ -18,7 +18,7 @@
 
                             @lang($ticket->subject)
                             <span
-                                class="badge badge-secondary status-{{$ticket->status}}">{{$ticket->status()}}</span>
+                                    class="badge badge-secondary status-{{$ticket->status}}">{{$ticket->status()}}</span>
                             <br>
                             <b>{{$ticket->user()->first()->name}}</b>
                             @lang('in')
@@ -34,14 +34,16 @@
                         <div class="card-body">
 
                             <div class="tickid">
-                                @lang('data di inserimento'): {{$ticketsReplies->created_at->format(config('app.format'))}}
+                                @lang('data di inserimento')
+                                : {{$ticketsReplies->created_at->format(config('app.format'))}}
                             </div>
-
 
 
                             @if($ticket->user()->find(auth()->id()) || auth()->user()->admin())
 
-                                <div data-toggle="modal" data-target="#change-dp" data-ticket="{{$ticketsReplies->ticket()->first()->id}}" data-id="{{$ticketsReplies->id}}">
+                                <div data-toggle="modal" data-target="#change-dp"
+                                     data-ticket="{{$ticketsReplies->ticket()->first()->id}}"
+                                     data-id="{{$ticketsReplies->id}}">
                                     <div class="change-dep cursor-pointer"
                                          data-toggle="tooltip" data-placement="bottom"
                                          title="@lang('Sposta in un nuovo ticket')">
@@ -50,7 +52,7 @@
                                         </i>
                                     </div>
                                 </div>
-                                @endif
+                            @endif
 
                             <span data-toggle="tooltip" data-placement="bottom"
                                   title="{{$ticketsReplies->user()->first()->name}}"
@@ -104,9 +106,13 @@
 
                                     @break
 
+                                    @case('tiny')
+                                    {!! $datasine['data'] !!}
+                                    @break
+
                                     @default
 
-                                    {!! dd($datasine) !!}
+                                    {{-- dd($datasine) --}}
 
                                 @endswitch
 
@@ -145,12 +151,12 @@
                                 <div class="col">
                                     <a href="/status/2/ticket/{{$ticket->id}}"
                                        class="btn btn-danger"><i
-                                            class="material-icons">
+                                                class="material-icons">
                                             remove_circle </i> @lang('chiudi')</a>
                                 </div>
                                 <div class="col">
-                                    <button type="button" class="btn btn-info reply-ticket-open"><i
-                                            class="material-icons">
+                                    <button type="button" class="btn btn-info tiny-open"><i
+                                                class="material-icons">
                                             create </i> @lang('rispondi')</button>
                                 </div>
                             @endif
@@ -163,33 +169,27 @@
         </div>
     </div>
 
-
-
     <div class="reply-ticket">
         <div class="card ticket">
-            <div class="card-header">
-                <div class="row text-center">
-                    <div class="col">
-                        <button type="button" class="btn btn-warning reply-ticket-close">
-                            <i class="material-icons"> close </i> @lang('annulla')</button>
-                    </div>
-
-                    <div class="col">
-                        <button type="button" class="btn btn-info send-reply-ticket"><i class="material-icons">
-                                create </i> @lang('rispondi')</button>
-                    </div>
-                </div>
-            </div>
-
             <div class="card-body">
-                <div id="codex-editor" data-ticket="{{$ticket->id}}"
-                     data-placeholder="@lang('Scrivi il contenuto del ticket con Testo, Immagini e allegati')"></div>
+                <div id="tiny-editor"></div>
             </div>
+
+            <div class="card-header" style=" position: absolute; right: 0; ">
+
+                <button type="button" class="btn btn-danger bmd-btn-fab tiny-close">
+                    <i class="material-icons">close</i>
+                </button>
+
+                <button id="ticket" data-tid="{{$ticket->id}}" type="button"
+                        class="btn btn-success bmd-btn-fab tiny-reply">
+                    <i class="material-icons">done</i>
+                </button>
+
+            </div>
+
         </div>
     </div>
-
-
-
 
     <div class="modal fade" id="change-dp" tabindex="-1" role="dialog" aria-labelledby="change-dp" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -234,4 +234,4 @@
             modal.find('#reply').val(reply);
         })
     </script>
-    @endsection
+@endsection

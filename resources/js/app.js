@@ -24,52 +24,52 @@ const codex = document.getElementById('codex-editor');
 
 if (codex) {
 
-    const editor = new EditorJS({
-        /**
-         * Id of Element that should contain the Editor
-         */
-        holder: 'codex-editor',
-        placeholder: codex.dataset.placeholder,
-
-        /**
-         * Available Tools list.
-         * Pass Tool's class or Settings object for each Tool you want to use
-         */
-
-        //
-        tools: {
-            header: {
-                class: Header,
-                inlineToolbar: true
-            },
-
-            image: {
-                class: ImageTool,
-                config: {
-                    endpoints: {
-                        byFile: '/@editorjs/image', // Your backend file uploader endpoint
-                        byUrl: '/@editorjs/image', // Your endpoint that provides uploading by Url
-                    }
-                }
-            },
-
-            // linkTool: {
-            //     class: LinkTool,
-            //     config: {
-            //         endpoint: '/@editorjs/link', // Your backend endpoint for url data fetching
-            //     }
-            // },
-
-            attaches: {
-                class: AttachesTool,
-                config: {
-                    endpoint: '/@editorjs/attaches'
-                }
-            }
-
-        },
-
-    });
+    // const editor = new EditorJS({
+    //     /**
+    //      * Id of Element that should contain the Editor
+    //      */
+    //     holder: 'codex-editor',
+    //     placeholder: codex.dataset.placeholder,
+    //
+    //     /**
+    //      * Available Tools list.
+    //      * Pass Tool's class or Settings object for each Tool you want to use
+    //      */
+    //
+    //     //
+    //     tools: {
+    //         header: {
+    //             class: Header,
+    //             inlineToolbar: true
+    //         },
+    //
+    //         image: {
+    //             class: ImageTool,
+    //             config: {
+    //                 endpoints: {
+    //                     byFile: '/@editorjs/image', // Your backend file uploader endpoint
+    //                     byUrl: '/@editorjs/image', // Your endpoint that provides uploading by Url
+    //                 }
+    //             }
+    //         },
+    //
+    //         // linkTool: {
+    //         //     class: LinkTool,
+    //         //     config: {
+    //         //         endpoint: '/@editorjs/link', // Your backend endpoint for url data fetching
+    //         //     }
+    //         // },
+    //
+    //         attaches: {
+    //             class: AttachesTool,
+    //             config: {
+    //                 endpoint: '/@editorjs/attaches'
+    //             }
+    //         }
+    //
+    //     },
+    //
+    // });
 
 
     $('.reply-ticket-open').click(function () {
@@ -142,7 +142,6 @@ if (codex) {
 
 }
 
-
 var Chart = require('chart.js');
 
 const home_charts = document.getElementById('home-charts');
@@ -211,3 +210,63 @@ document.querySelectorAll('form').forEach(form => {
 
     });
 });
+
+
+// TODO: MUST REFACTORING => CLEAR CODE -_-'
+// new reply tiny
+
+const tinymce = require('tinymce');
+var tinyeditor = document.getElementById('tiny-editor');
+
+if (tinyeditor) {
+
+    $('.tiny-open').click(function () {
+        TweenLite.to('.reply-ticket', .3, {bottom: '0px'});
+    });
+
+    $('.tiny-close').click(function () {
+        TweenLite.to('.reply-ticket', .3, {bottom: '-1220px'});
+    });
+
+    tinymce.init({
+        selector: "#tiny-editor",
+        height: (document.querySelector('.reply-ticket').scrollHeight - 80),
+        plugins: "paste",
+        paste_data_images: true
+    });
+
+    document.querySelector('.tiny-reply').addEventListener('click', tinyReply);
+
+    function tinyReply() {
+
+        var ticket = document.getElementById('ticket');
+
+        axios.post('/@tiny/save/ticket/' + ticket.dataset.tid, {
+            data: {
+                blocks: [{
+                    type: 'tiny',
+                    data: tinymce.activeEditor.getContent() || ''
+                }]
+            }
+        })
+            .then(response => {
+
+                return console.log(response);
+
+                TweenLite.to('body', .1, {opacity: 0.5});
+
+                TweenLite.to('.reply-ticket', 0.3, {
+                    bottom: '-1220px',
+                    onComplete: () => {
+                        location.reload();
+                    }
+                })
+            })
+            .catch((error) => {
+                swal(error.response.statusText, error.response.data.message, "error");
+                console.log('Saving failed: ', error.response)
+                inreplyout();
+            });
+    }
+
+}

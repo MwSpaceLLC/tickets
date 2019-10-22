@@ -51,10 +51,13 @@ so u must login as user in to ssh & cd in your project:
 
     // Optimize for relese...
     php tik optimize
-
+    
 If u have any problem, please first read the Laravel's guide =)
 
 ### 🔫 Trick & Knows
+
+U 22/10/19
+- Changed Editor
 
 U 22/09/19
 - Department status

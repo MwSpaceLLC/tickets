@@ -61,6 +61,10 @@ Route::middleware('checkroles')->group(function () {
 
     Route::post('/@editorjs/save/ticket/{id}', 'EditorjsController@save')->name('editorjs.save');
 
+    // tiny Update
+    Route::post('/@tiny/save/ticket/{id}', 'TinyController@save')->name('tiny.save');
+
+
     Route::post('/new/ticket/open', 'TicketController@open')->name('ticket.open');
 
     Route::get('/status/{status}/ticket/{id}', 'TicketController@close')->name('ticket.close');

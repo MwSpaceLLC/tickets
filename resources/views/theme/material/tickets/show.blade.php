@@ -229,6 +229,10 @@
             $(this).addClass('_blank');
         });
 
+        $('#body-tid img').each(function () {
+            $(this).css('width', '100%');
+        });
+
         $('#change-dp').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var ticket = button.data('ticket') // Extract info from data-* attributes

@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //prevent change page fade
 document.querySelectorAll('a').forEach(element => {
-    if (element.href) {
+    if (element.href && element.getAttribute('target') !== '_blank') {
         element.addEventListener('click', e => {
             e.preventDefault();
             TweenLite.to('body', .3, {
@@ -187,6 +187,8 @@ document.querySelectorAll('a').forEach(element => {
                 }
             })
         })
+    } else {
+        window.open(element.href, "element.href", "width="+screen.availWidth+",height="+screen.availHeight)
     }
 });
 

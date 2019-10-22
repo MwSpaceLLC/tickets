@@ -225,12 +225,9 @@
 
 @section('js')
     <script rel="script" type="application/javascript">
-        window.onload = function () {
-            var anchors = document.getElementById('body-tid').getElementsByTagName('a');
-            for (var i = 0; i < anchors.length; i++) {
-                anchors[i].setAttribute('target', '_blank');
-            }
-        };
+        $('#body-tid a').each(function () {
+            $(this).attr('target', '_blank');
+        });
 
         $('#change-dp').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal

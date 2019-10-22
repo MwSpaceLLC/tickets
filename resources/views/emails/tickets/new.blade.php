@@ -543,52 +543,6 @@
         </td>
     </tr>
 </table><!-- End Wrapper 1 -->
-<!-- Wrapper 2 (Collored Banner, Center Text) -->
-<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="full">
-    <tr>
-        <td width="100%" align="center"
-            style="    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);">
-
-
-            <!-- Wrapper -->
-            <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="mobile">
-                <tr>
-                    <td width="100%" align="center">
-
-                        <!-- Headline -->
-                        <table width="1080" border="0" cellpadding="0" cellspacing="0" align="center"
-                               style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
-                               class="full">
-                            <tr>
-                                <td width="100%" height="30"></td>
-                            </tr>
-                            <tr>
-                                <td width="100%"
-                                    style="font-size: 26px; color: rgb(69,69,69); text-align: center; font-family: proxima_nova_softregular, Helvetica, Arial, sans-serif; line-height: 36px; vertical-align: top;">
-                                    <p><b>{{$ticket->subject}}</b></p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="100%" height="30"></td>
-                            </tr>
-                        </table>
-
-                    </td>
-                </tr>
-            </table><!-- End Wrapper  -->
-
-            </div>
-        </td>
-    </tr>
-</table><!-- Wrapper 2 -->
-<!-- Space -->
-<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="full">
-    <tr>
-        <td width="100%" height="20" align="center">
-            </div></td>
-    </tr>
-</table><!-- End Space -->
-
 
 <!-- foreach cycle (2 Column - Image Left , Text Right) -->
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="full">

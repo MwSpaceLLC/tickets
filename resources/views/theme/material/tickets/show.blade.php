@@ -30,7 +30,7 @@
 
                 @forelse($ticket->replies()->get() as $ticketsReplies)
 
-                    <div class="card inner-ticket">
+                    <div class="card inner-ticket" id="body-tid">
                         <div class="card-body">
 
                             <div class="tickid">
@@ -224,7 +224,14 @@
 @endsection
 
 @section('js')
-    <script>
+    <script rel="script" type="application/javascript">
+        window.onload = function () {
+            var anchors = document.getElementById('body-tid').getElementsByTagName('a');
+            for (var i = 0; i < anchors.length; i++) {
+                anchors[i].setAttribute('target', '_blank');
+            }
+        };
+
         $('#change-dp').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var ticket = button.data('ticket') // Extract info from data-* attributes

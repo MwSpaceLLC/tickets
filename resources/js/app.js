@@ -180,10 +180,11 @@ document.addEventListener('DOMContentLoaded', () => {
 document.querySelectorAll('a').forEach(element => {
     if (element.href) {
         element.addEventListener('click', e => {
+            e.preventDefault();
+
             if (element.classList.contains('_blank')) {
                 window.open(element.href, element.href, "width=" + screen.availWidth + ",height=" + screen.availHeight)
             } else {
-                e.preventDefault();
                 TweenLite.to('body', .3, {
                     opacity: 0, onComplete: () => {
                         location.href = element.href

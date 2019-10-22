@@ -14,16 +14,26 @@ use function foo\func;
 
 class TicketController extends Controller
 {
+    /**
+     * TicketController constructor.
+     */
     public function __construct()
     {
         $this->middleware('checkroles');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function new()
     {
         return view('theme.' . config('app.theme') . '.tickets.new');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|void
+     */
     public function open(Request $request)
     {
 
@@ -32,7 +42,7 @@ class TicketController extends Controller
             return abort(403, __('Nessun dipartimento al momento. Torna indietro'));
         }
 
-        if(!Department::findOrFail($request->department)){
+        if (!Department::findOrFail($request->department)) {
 
             return abort(403, __('il reparto in questione non esiste'));
         }
@@ -47,7 +57,7 @@ class TicketController extends Controller
             return abort(403, __('Non hai accesso a questo reparto. Torna indietro'));
         }
 
-        if(!Department::findOrFail($request->department)->status){
+        if (!Department::findOrFail($request->department)->status) {
 
             return abort(403, __('il reparto in questione è momentaneamente non disponibile'));
         }
@@ -66,6 +76,10 @@ class TicketController extends Controller
         return redirect("/ticket/{$ticket->id}");
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function list(Request $request)
     {
         if ($request->status === 'open' || $request->status === 'working') {
@@ -77,12 +91,21 @@ class TicketController extends Controller
         }
 
         $tickets = isset($request->status) ?
-            Tickets::where('status', $request->status)->get() :
-            Tickets::get();
+            Tickets::where('status', $request->status)->get() : Tickets::get();
+
+        if (!\auth()->user()->admin()) {
+            $tickets = isset($request->status) ?
+                Tickets::where('status', $request->status)->where('user_id', \auth()->id())->get() :
+                Tickets::where('user_id', \auth()->id())->get();
+        }
 
         return view('theme.' . config('app.theme') . '.tickets.list')->with('tickets', $tickets);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
+     */
     public function show(Request $request)
     {
         $ticket = Tickets::findOrFail($request->id);
@@ -114,6 +137,10 @@ class TicketController extends Controller
         return view('theme.' . config('app.theme') . '.tickets.show')->with('ticket', $ticket);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function close(Request $request)
     {
 
@@ -125,9 +152,14 @@ class TicketController extends Controller
 
     }
 
-    public function changeDp(Request $request){
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function changeDp(Request $request)
+    {
 
-        if(\auth()->user()->admin()){
+        if (\auth()->user()->admin()) {
             $oldTicket = Tickets::findOrFail($request->ticket);
         } else {
             $oldTicket = \auth()->user()->tickets()->findOrFail($request->ticket);
@@ -149,7 +181,7 @@ class TicketController extends Controller
 
         $oldReply->delete();
 
-        if(!$oldTicket->replies()->first()){
+        if (!$oldTicket->replies()->first()) {
             $oldTicket->views()->delete();
             $oldTicket->delete();
         }

@@ -6,7 +6,7 @@
               title="{{$ticket->department()->first()->title}}"
               style="background: {{$ticket->department()->first()->rgb}}"></span>
 
-        {{$ticket->subject}}<br>
+        ({{$ticket->user()->first()->name}}) in [{{$ticket->subject}}]<br>
         <strong>{{$ticket->department()->first()->title}}</strong>
 
         <div class="si-views">
@@ -22,7 +22,7 @@
     </td>
 
     <td><span
-            class="badge badge-secondary status-{{$ticket->status}}">{{$ticket->status()}}</span>
+                class="badge badge-secondary status-{{$ticket->status}}">{{$ticket->status()}}</span>
     </td>
 
     @if($ticket->replies()->first())

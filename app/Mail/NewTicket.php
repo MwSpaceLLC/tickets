@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Pipe;
 use App\Tickets;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -38,7 +39,9 @@ class NewTicket extends Mailable
 
         $from = config('app.from');
 
-        if ($pipe = $this->ticket->department()->first()->pipe()->first())
+        $department = $this->ticket->department()->first();
+
+        if ($pipe = Pipe::where('id', $department->mail_id)->first())
             $from = $pipe->username;
 
         return $this

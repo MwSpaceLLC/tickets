@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pipe;
 use App\Tickets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -13,6 +14,9 @@ class TestController extends Controller
         $this->middleware('admincheck');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
+     */
     public function testMail()
     {
         if (!$ticket = Tickets::first())
@@ -24,8 +28,14 @@ class TestController extends Controller
         return view('emails.tickets.new')->with('ticket', $ticket);
     }
 
+    /**
+     * @param Request $request
+     */
     public function testPiper(Request $request)
     {
+        if (!$ticket = Pipe::first())
+            return abort(403, 'NON HAI NESSUN PIPER PER TESTARE IL CRON JOB');
+
         Artisan::call('piper:check');
         echo "{$request->header('User-Agent')}<br>";
         echo "<b>Imap Cron Job</b> has been complete!";

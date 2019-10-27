@@ -41,6 +41,9 @@ Route::middleware(['admincheck', 'checkroles'])->group(function () {
 
     Route::post('/user/{user}/update', 'AdminController@userUpdate')->name('users.update');
 
+    Route::get('/http/html5/mail', 'TinyController@MailTheme')->name('get.piper');
+
+
     // Add Piper
     Route::post('/mail/add/pipe', 'PipeController@addServer')->name('pipe.add');
 
@@ -48,12 +51,11 @@ Route::middleware(['admincheck', 'checkroles'])->group(function () {
 
     Route::get('/pipe/{pipe}/department/{department}', 'PipeController@piperDepartment')->name('pipe.department');
 
-    // Route for test
 
+    // Route for test
     Route::get('/http/test/mail', 'TestController@testMail')->name('test.mail');
 
     Route::get('/http/cron/invoke', 'TestController@testPiper')->name('test.piper');
-
 });
 
 /** @administration ===================================================== */

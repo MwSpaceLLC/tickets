@@ -112,8 +112,7 @@
                                     </div>
                                 </div>
                                 <hr class="mb-4">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Add new piper account
-                                </button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Add piper</button>
                             </form>
 
 
@@ -145,7 +144,7 @@
                         <h5 class="mb-0">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
                                     aria-expanded="false" aria-controls="collapseThree">
-                                MAIL TEMPLATE SETTING
+                                MAIL TEMPLATE SETTING (coming soon)
                             </button>
 
                             <a class="btn btn-info btn-sm _blank" href="/http/test/mail" target="_blank">http test</a>
@@ -153,18 +152,15 @@
                     </div>
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                         <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                            squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
-                            nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                            single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
-                            beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
-                            lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-                            probably haven't heard of them accusamus labore sustainable VHS.
+                            <form method="post" action="/save/theme/mail">
+                                {{--                                <textarea id="tiny-editor-setting" name="theme"></textarea>--}}
+                                <hr class="mb-4">
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Update Template</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-
 
         </div>
     </div>

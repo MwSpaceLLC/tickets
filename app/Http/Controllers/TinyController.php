@@ -6,7 +6,6 @@ use App\Mail\NewTicket;
 use App\TicketReply;
 use App\Tickets;
 use App\User;
-use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -86,5 +85,16 @@ class TinyController extends Controller
         }
 
         return response()->json('success');
+    }
+
+    public function MailTheme()
+    {
+        $string = file_get_contents(resource_path('views/emails/tickets/new.blade.php'));
+        $string = str_replace('', '', $string);
+        $string = file_get_contents(resource_path('views/emails/tickets/new.blade.php'));
+        $string = file_get_contents(resource_path('views/emails/tickets/new.blade.php'));
+        $string = file_get_contents(resource_path('views/emails/tickets/new.blade.php'));
+
+        return \response()->json(file_get_contents(resource_path('views/emails/tickets/new.blade.php')));
     }
 }

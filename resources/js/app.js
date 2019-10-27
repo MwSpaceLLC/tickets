@@ -278,3 +278,22 @@ if (tinyeditor) {
     }
 
 }
+
+var tinyeditorsetting = document.getElementById('tiny-editor-setting');
+
+if (tinyeditorsetting) {
+
+    axios.get('/http/html5/mail')
+        .then(response => {
+            tinyeditorsetting.innerHTML = response.data
+        })
+        .catch((error) => {
+            swal(error.response.statusText, error.response.data.message, "error");
+        });
+
+    tinymce.init({
+        selector: "#tiny-editor-setting",
+        height: 650,
+    });
+
+}

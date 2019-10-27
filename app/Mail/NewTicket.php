@@ -35,10 +35,18 @@ class NewTicket extends Mailable
      */
     public function build()
     {
+
+        $from = config('app.from');
+
+        if ($pipe = $this->ticket->department()->first()->pipe()->first())
+            $from = $pipe->username;
+
         return $this
-            ->from(config('app.from'))
-            ->subject(__('NUOVA RISPOSTA AL TICKET #') . $this->ticket->id)
+            ->from($from)
+            ->subject("Ticket: #{$this->ticket->id} [{$this->subject}]")
             ->view('emails.tickets.new')
             ->with('ticket', $this->ticket);
     }
 }
+
+

@@ -46,7 +46,7 @@ class NewTicket extends Mailable
 
         return $this
             ->from($from)
-            ->subject("Ticket: #{$this->ticket->id} [{$this->subject}]")
+            ->subject("Ticket: #{$this->ticket->id} [{$this->ticket->subject}]")
             ->view('emails.tickets.new')
             ->with('ticket', $this->ticket);
     }

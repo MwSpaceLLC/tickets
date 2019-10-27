@@ -61,7 +61,7 @@
                             </span>
 
                             <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;border-top:2px solid #e8e8e8;padding-top:5px;margin-top:5px;font-size:12px;color:#666666">
-                                {!!  $ticket->replies()->latest()->first()->row !!}
+                                {!!  $ticketsReplies->row !!}
                             </div>
 
                         </div>

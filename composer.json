@@ -11,6 +11,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "ext-json": "*",
         "codex-team/editor.js": "dev-master",
         "doctrine/dbal": "^2.9",
         "fideloper/proxy": "^4.0",
@@ -18,7 +19,7 @@
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
         "shweshi/opengraph": "^1.0",
-        "ext-json": "*"
+        "webklex/laravel-imap": "^1.4"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

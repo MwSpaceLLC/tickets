@@ -7,6 +7,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Artisan;
 
 class Kernel extends ConsoleKernel
 {
@@ -19,13 +20,6 @@ class Kernel extends ConsoleKernel
         //
     ];
 
-    public function __construct(Application $app, Dispatcher $events)
-    {
-        parent::__construct($app, $events);
-
-        define('ARTISAN_BINARY', 'tik');
-    }
-
     /**
      * Define the application's command schedule.
      *
@@ -34,7 +28,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('piper:check')->everyMinute()->withoutOverlapping();
+        $schedule->call(function () {
+            Artisan::call('piper:check');
+        })->everyMinute()->withoutOverlapping();
     }
 
     /**

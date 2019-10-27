@@ -60,63 +60,10 @@
                                 {{substr($ticketsReplies->user()->first()->name, 0, 2)}}
                             </span>
 
-                            @foreach(unserialize($ticketsReplies->row) as $key => $datasine)
-                                @switch($datasine['type'])
+                            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;border-top:2px solid #e8e8e8;padding-top:5px;margin-top:5px;font-size:12px;color:#666666">
+                                {!!  $ticket->replies()->latest()->first()->row !!}
+                            </div>
 
-                                    @case('image')
-                                    <img src="{{$datasine['data']['file']['url']}}" width="100%">
-                                    <br>
-                                    <br>
-                                    @break
-
-                                    @case('header')
-                                    <h2>{!! $datasine['data']['text'] !!}</h2>
-                                    @break
-
-                                    @case('paragraph')
-                                    <p>{!! $datasine['data']['text'] !!}</p>
-                                    @break
-
-                                    @case('linkTool')
-
-                                    <div class="card">
-                                        <h6 class="card-headers">
-                                            <img src="{!! $datasine['data']['meta']['image']['url'] !!}" width="125px">
-                                            {!! $datasine['data']['meta']['title'] !!}
-                                        </h6>
-                                        <div class="card-body">
-                                            <p class="card-text">{!! $datasine['data']['meta']['description'] !!}</p>
-                                            <a href="{!! $datasine['data']['link'] !!}" target="_blank"
-                                               class="btn btn-primary">@lang('apri link')</a>
-                                        </div>
-                                    </div>
-                                    <br>
-
-                                    @break
-
-                                    @case('attaches')
-                                    <div class="alert alert-dark" role="alert">
-                                        <h5> {{$datasine['data']['title']}} |
-                                            <span onclick='window.open("{{$datasine['data']['file']['url']}}")'
-                                                  class="btn btn-info "><i class="material-icons">
-                                                        cloud_download </i></span>
-                                        </h5>
-                                    </div>
-                                    <br>
-
-                                    @break
-
-                                    @case('tiny')
-                                    {!! $datasine['data'] !!}
-                                    @break
-
-                                    @default
-
-                                    {{-- dd($datasine) --}}
-
-                                @endswitch
-
-                            @endforeach
                         </div>
                     </div>
                 @empty
@@ -230,7 +177,7 @@
         });
 
         $('#body-tid img').each(function () {
-            $(this).css('width', '100%');
+            $(this).css('max-width', '100%');
             $(this).css('object-fit', 'contain');
         });
 

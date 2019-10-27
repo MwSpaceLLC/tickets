@@ -57,7 +57,7 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php tickets package:discover --ansi"
+            "@php tik package:discover --ansi"
         ],
         "post-create-project-cmd": [
 

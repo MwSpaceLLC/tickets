@@ -5,6 +5,8 @@
 /public/js/app.js
 /public/css/app.css
 
+/tickets-drive
+
 /storage/*.key
 /vendor
 

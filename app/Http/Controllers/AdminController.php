@@ -96,6 +96,7 @@ class AdminController extends Controller
             $departmentUser->write = 0;
             $departmentUser->read = 0;
             $departmentUser->listen = 0;
+            $departmentUser->manage = 0;
 
             /**
              * @force override

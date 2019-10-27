@@ -28,4 +28,9 @@ class Department extends Model
                 break;
         }
     }
+
+    public function pipe()
+    {
+        return $this->hasOne('App\Pipe', 'mail_id');
+    }
 }

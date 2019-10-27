@@ -1,15 +1,12 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | Web Routes
+ * |--------------------------------------------------------------------------
+ */
+
+// TODO: Must refactoring with add method RouteServicesProvider
 
 Route::get('/', 'HomeController@welcome')->name('welcome');
 
@@ -27,7 +24,7 @@ Route::middleware(['test'])->group(function () {
 
 /** @administration ===================================================== */
 
-Route::middleware(['admincheck','checkroles'])->group(function () {
+Route::middleware(['admincheck', 'checkroles'])->group(function () {
     Route::get('/departments', 'AdminController@departments')->name('departments');
 
     Route::post('/new/department', 'AdminController@newdepartment')->name('new.departments');
@@ -43,6 +40,19 @@ Route::middleware(['admincheck','checkroles'])->group(function () {
     Route::get('/user/{user}/manage', 'AdminController@userManage')->name('users.manage');
 
     Route::post('/user/{user}/update', 'AdminController@userUpdate')->name('users.update');
+
+    // Add Piper
+    Route::post('/mail/add/pipe', 'PipeController@addServer')->name('pipe.add');
+
+    Route::get('/pipe/{pipe}/status/{active}', 'PipeController@piperChange')->name('pipe.status');
+
+    Route::get('/pipe/{pipe}/department/{department}', 'PipeController@piperDepartment')->name('pipe.department');
+
+    // Route for test
+
+    Route::get('/http/test/mail', 'TestController@testMail')->name('test.mail');
+
+    Route::get('/http/cron/invoke', 'TestController@testPiper')->name('test.piper');
 
 });
 

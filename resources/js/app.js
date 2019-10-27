@@ -233,11 +233,15 @@ if (tinyeditor) {
         TweenLite.to('.reply-ticket', .3, {bottom: '-1220px'});
     });
 
+    var drive = require('./drive');
+
     tinymce.init({
         selector: "#tiny-editor",
         height: (document.querySelector('.reply-ticket').scrollHeight - 80),
-        plugins: "paste",
-        paste_data_images: true
+        plugins: "paste media drive",
+        paste_data_images: true,
+        toolbar_drawer: 'floating',
+        toolbar: 'undo redo | formatselect | bold italic strikethrough forecolor backcolor blockquote | link image media drive | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent | removeformat',
     });
 
     document.querySelector('.tiny-reply').addEventListener('click', tinyReply);
@@ -249,12 +253,7 @@ if (tinyeditor) {
         var ticket = document.getElementById('ticket');
 
         axios.post('/@tiny/save/ticket/' + ticket.dataset.tid, {
-            data: {
-                blocks: [{
-                    type: 'tiny',
-                    data: tinymce.activeEditor.getContent() || ''
-                }]
-            }
+            data: tinymce.activeEditor.getContent() || ''
         })
             .then(response => {
 

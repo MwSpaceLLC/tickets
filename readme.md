@@ -9,7 +9,7 @@ No mounthly cost, only deploy app on cloud, & work every u want!
 
 ### 👛 Important !! 
 
-This repo NOT stable, please download at your risk. Public beta will cooming soon at 30/09/2019
+This repo NOT stable, please download at your risk. Public beta will cooming soon at 30/10/2019
 
 ### 🛒 Requirement
 - composer
@@ -56,6 +56,10 @@ If u have any problem, please first read the Laravel's guide =)
 
 ### 🔫 Trick & Knows
 
+U 27/10/19
+- Changed Mail Template
+- Added method smtp (for open ticket by mail)
+
 U 22/10/19
 - Changed Editor
 
@@ -96,3 +100,5 @@ With git, u can update the core. if this repo are Stable, or Beta u can easily u
     // Update the db strutture...
     php tik optimize
 
+    // Run all Mix tasks and minify output...
+    npm install & npm run production

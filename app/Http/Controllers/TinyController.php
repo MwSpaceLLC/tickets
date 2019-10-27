@@ -8,6 +8,7 @@ use App\Tickets;
 use App\User;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class TinyController extends Controller
@@ -45,7 +46,7 @@ class TinyController extends Controller
             return response()->json(['message' => __('non hai i permessi di scrittura per questo reparto')], 403);
         }
 
-        if (empty($request->data['blocks'])) {
+        if (empty($request->data)) {
 
             return response()->json(['message' => __('non puoi pubblicare risposte vuote')], 401);
         }
@@ -53,7 +54,7 @@ class TinyController extends Controller
         $ticketReply = new TicketReply();
         $ticketReply->user_id = \auth()->id();
         $ticketReply->ticket_id = $request->id;
-        $ticketReply->row = serialize($request->data['blocks']);
+        $ticketReply->row = $request->data;
         $ticketReply->save();
 
         $author = Tickets::find($request->id)->user()->first();
@@ -76,7 +77,7 @@ class TinyController extends Controller
             foreach ($users as $user) {
                 $role = $user->department()->where('department_id', $department->id)->first();
 
-                if ($role && $role->listen > 0) {
+                if ($role && $role->manage > 0) {
                     if ($user->id !== $author->id) {
                         Mail::to($user->email)->send(new NewTicket($ticket));
                     }

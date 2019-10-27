@@ -66,6 +66,17 @@
                                             @endif
                                             <span>@lang('ascolta')</span>
                                         </label>
+                                        <label class="form-check-label pure-material-checkbox">
+                                            @if($role = $department->user()->where('user_id',$user->id)->first())
+                                                <input type="checkbox"
+                                                       {{$role->manage? 'checked':''}} name="department[{{$department->id}}][manage]"
+                                                       id="remember">
+                                            @else
+                                                <input type="checkbox" name="department[{{$department->id}}][manage]"
+                                                       id="remember">
+                                            @endif
+                                            <span>@lang('manage')</span>
+                                        </label>
                                     </div>
                                 </div>
                             @endforeach
@@ -75,7 +86,7 @@
                             <div class="row">
                                 <div class="col text-right">
                                     <button type="submit" class="btn btn-info send-reply-ticket"><i
-                                            class="material-icons">
+                                                class="material-icons">
                                             create </i> @lang('aggiorna preferenze')</button>
                                 </div>
                             </div>

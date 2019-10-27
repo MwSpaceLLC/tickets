@@ -44,6 +44,18 @@ class PiperCheck extends Command
      * @throws \Webklex\IMAP\Exceptions\MailboxFetchingException
      * @throws \Webklex\IMAP\Exceptions\MaskNotFoundException
      */
+    public function __invoke()
+    {
+        $this->handle();
+    }
+
+    /**
+     * @throws \Webklex\IMAP\Exceptions\ConnectionFailedException
+     * @throws \Webklex\IMAP\Exceptions\GetMessagesFailedException
+     * @throws \Webklex\IMAP\Exceptions\InvalidMessageDateException
+     * @throws \Webklex\IMAP\Exceptions\MailboxFetchingException
+     * @throws \Webklex\IMAP\Exceptions\MaskNotFoundException
+     */
     public function handle()
     {
         $this->info('START TO CONNECT...');

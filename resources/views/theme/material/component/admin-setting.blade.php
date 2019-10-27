@@ -112,7 +112,8 @@
                                     </div>
                                 </div>
                                 <hr class="mb-4">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Add new piper account</button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Add new piper account
+                                </button>
                             </form>
 
 
@@ -134,7 +135,7 @@
                         <div class="card-body row" style="zoom: 1.5">
                             <span class="col-md-2"><b>* * * * *</b></span>
                             <span class="col"><input style=" width: 100%; "
-                                                     value="cd {{app_path()}} && php tik schedule:run >> /dev/null 2>&1"
+                                                     value="cd {{base_path()}} && php tik schedule:run >> /dev/null 2>&1"
                                                      readonly></span>
                         </div>
                     </div>

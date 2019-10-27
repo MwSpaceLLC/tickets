@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function () {
             Artisan::call('piper:check');
-        })->withoutOverlapping()->everyMinute();
+        })->everyMinute();
     }
 
     /**

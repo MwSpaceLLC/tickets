@@ -6,7 +6,7 @@
               title="{{$ticket->department()->first()->title}}"
               style="background: {{$ticket->department()->first()->rgb}}"></span>
 
-        ({{$ticket->user()->first()->name}}) in [{{$ticket->subject}}]<br>
+        ({{$ticket->user()->first()->name}}) [{{$ticket->subject}}]<br>
         <strong>{{$ticket->department()->first()->title}}</strong>
 
         <div class="si-views">

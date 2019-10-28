@@ -78,6 +78,8 @@ class PiperCheck extends Command
         $this->info('');
         $this->info('SUCCESS! ALL HOST HAS BEEN CHECKED');
 
+        // TODO: alert for department
+
     }
 
     /**
@@ -148,6 +150,9 @@ class PiperCheck extends Command
                     Log::alert('Failed DELETE the current Message');
                     return $this->error('Failed DELETE the current Message');
                 }
+
+                // TODO: auto reply for success open ticket
+
             }
         }
     }
